@@ -16,7 +16,9 @@ from matplotlib.pyplot import Figure, colorbar
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 import numpy as np
 
-NK_PATH = "../../nk/"
+
+
+NK_PATH = Path(__file__).parent
 
 class Plot:
     def __init__(self, x, y, color=None, name=None):
@@ -173,7 +175,7 @@ class MainWindow:
         
         x, y = np.loadtxt(filepath, skiprows = 1, unpack=True)
         self.plots.append(Plot(x, y, name= f"Plot {next(self.n_loaded)}"))
-        self.make_plot_labels(self.frm_plots)
+        self.make_plot_labels()
 
     def open_save_plots(self):
         if self.save_win: self.save_win.destroy()
@@ -215,8 +217,8 @@ class StructWindow:
         self.root.protocol("WM_DELETE_WINDOW", self.root.withdraw)
         self.root.withdraw()   
         self.layers = [
-            Layer("Air", NK_PATH+"/air.nk", "inf", 0),
-            Layer("Si", NK_PATH+"/Si.nk", "inf", 0),
+            Layer("Air", NK_PATH / "air.nk", "inf", 0),
+            Layer("Si", NK_PATH / "Si.nk", "inf", 0),
             ]
         self.active = tk.IntVar(value=0)
         self.lams = Wavelengths(200, 1000, 500)

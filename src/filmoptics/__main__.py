@@ -18,7 +18,7 @@ import numpy as np
 
 
 
-NK_PATH = Path(__file__).parent
+NK_PATH = Path(__file__).parent.parent / "nk"
 
 class Plot:
     def __init__(self, x, y, color=None, name=None):
